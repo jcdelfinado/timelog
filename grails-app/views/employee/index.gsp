@@ -21,10 +21,10 @@
 						<tbody>
 							<g:each in="${employeeList}" var="employee">
 								<tr>
-									<td>${ employee.getFullName() }</td>
-									<td>${ employee.position }</td>
-									<td><g:formatBoolean boolean="${ employee.isLoggedIn }" true="IN" false="OUT"/></td>
-									<td><g:formatDate format="E, dd-MMM-yyyy hh:mm a"/></td>
+									<td>${ employee?.fullName() }</td>
+									<td>${ employee?.position }</td>
+									<td><g:formatBoolean boolean="${ employee?.isLoggedIn }" true="IN" false="OUT"/></td>
+									<td><g:formatDate format="E, dd-MMM-yyyy hh:mm a" date="${ employee?.lastLog }"/></td>
 								</tr>
 							</g:each>
 						</tbody>

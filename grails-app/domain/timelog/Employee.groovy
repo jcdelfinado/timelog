@@ -15,7 +15,16 @@ class Employee {
 	
 	static transients = ['photo'] 
     static constraints = {
-		photo_url defaultValue: "'default-avatar.png'"
-		pin matches: "/[0-9]{4}/" //four-digit pin
+		isLoggedIn defaultValue: "0"
+		isAdmin defaultValue: "0"
+		lastLog nullable:true
+		photo nullable:true
+		photo_url nullable:true
+		pin matches: "[0-9]{4}" //four-digit pin
     }
+	static mappings = {
+		photo_url defaultValue: "default-avatar.png"
+	}
+	
+	def fullName() {return firstName + " " + middleName[0].toUpperCase() + ". " + lastName} 
 }

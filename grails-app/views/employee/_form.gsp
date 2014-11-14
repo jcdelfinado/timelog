@@ -1,9 +1,12 @@
 <%--FIRST NAME--%>
 <div class="form-group ${ hasErrors(bean:employee, field:'firstName', 'has-error has-feedback') }">
 	<label for="firstName"><g:message code="employee.firstName.label" default="First Name"/></label>
-	<g:textField class="form-control" name="firstName" value="${ employee?.firstName }" />
+	<g:textField class="form-control" name="firstName" value="${ employee?.firstName }" required=""/>
 	<g:hasErrors bean="${ employee }" field="firstName">
 		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		<g:eachError bean="${ employee }" field="firstName" var="e">
+			<span class="help-block"><g:message error="${e}"/></span>
+		</g:eachError>
 	</g:hasErrors>
 </div>
 
@@ -13,6 +16,9 @@
 	<g:textField class="form-control" name="middleName" value="${ employee?.middleName }"required=""/>
 	<g:hasErrors bean="${ employee }" field="middleName">
 		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		<g:eachError bean="${ employee }" field="middleName" var="e">
+			<span class="help-block"><g:message error="${e}"/></span>
+		</g:eachError>
 	</g:hasErrors>
 </div>
 
@@ -22,6 +28,9 @@
 	<g:textField class="form-control" name="lastName" value="${ employee?.lastName }"required=""/>
 	<g:hasErrors bean="${ employee }" field="lastName">
 		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		<g:eachError bean="${ employee }" field="lastName" var="e">
+			<span class="help-block"><g:message error="${e}"/></span>
+		</g:eachError>
 	</g:hasErrors>
 </div>
 
@@ -31,9 +40,22 @@
 	<g:textField class="form-control" name="position" value="${ employee?.position }" required=""/>
 	<g:hasErrors bean="${ employee }" field="position">
 		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		<g:eachError bean="${ employee }" field="position" var="e">
+			<span class="help-block"><g:message error="${e}"/></span>
+		</g:eachError>
 	</g:hasErrors>
 </div>
-
+<%--PIN--%>
+<div class="form-group ${ hasErrors(bean:employee, field:'pin', 'has-error has-feedback') }">
+	<label for="pin"><g:message code="employee.pin.label" default="PIN"/></label>
+	<g:textField class="form-control" name="pin" value="${ employee?.pin }" required=""/>
+	<g:hasErrors bean="${ employee }" field="pin">
+		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+		<g:eachError bean="${ employee }" field="pin" var="e">
+			<span class="help-block"><g:message error="${e}"/></span>
+		</g:eachError>
+	</g:hasErrors>
+</div>
 <%--ADMIN--%>
 <div class="form-group form-inline ${ hasErrors(bean:employee, field:'isAdmin', 'has-error has-feedback') }">
 	<label>

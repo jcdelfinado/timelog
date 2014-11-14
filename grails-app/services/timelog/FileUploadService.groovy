@@ -2,6 +2,7 @@ package timelog
 
 import grails.transaction.Transactional
 import org.springframework.web.multipart.MultipartFile
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
 
 @Transactional
 class FileUploadService {
@@ -26,7 +27,7 @@ class FileUploadService {
 			def url = "${basePath}/${name}"
 			file.transferTo(new File(url))
 			println "FILE SAVED: ${url}"
-			return url
+			return "${destination}/${name}"
 		} else {
 			println "FILE NOT SAVED"
 			return null

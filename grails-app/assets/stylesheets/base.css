@@ -8,6 +8,18 @@ header.well{
 	margin-bottom: 10px;
 }
 
-.btn{
-	
+.row.large-clearing{
+	margin: 20px auto
+}
+
+.circle-crop-200{	
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	border-radius: 100px;
+	height: 200px;
+	width: 200px;
+	border: 8px solid #fff;
+	box-shadow: 4px 4px 10px #000;
+	margin: 0 auto;
 }

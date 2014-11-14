@@ -85,6 +85,13 @@ grails.hibernate.pass.readonly = false
 // configure passing read-only to OSIV session by default, requires "singleSession = false" OSIV mode
 grails.hibernate.osiv.readonly = false
 
+grails.plugin.angularjs.version = "1.2.23"
+grails.plugin.angularjs.i18n = ["de-de", "en-us"]
+grails.plugin.angularjs.modules = ["animate", "cookies", "loader", "mocks", "resource", "route", "sanitize", "touch"]
+grails.plugin.angularjs.resourcesDisposition = "head"
+grails.plugin.angularjs.resourcesNominify = true
+grails.plugin.angularjs.autoDownload = true
+
 environments {
     development {
         grails.logging.jul.usebridge = true

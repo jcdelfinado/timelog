@@ -20,10 +20,10 @@ class Employee {
 		lastLog nullable:true
 		photo nullable:true
 		photo_url nullable:true
-		pin matches: "[0-9]{4}" //four-digit pin
+		pin matches: "[0-9]{4}", unique: true //unique four-digit pin
     }
 	static mappings = {
-		photo_url defaultValue: "default-avatar.png"
+		photo_url defaultValue: "images/default-avatar.png"
 	}
 	
 	def fullName() {return firstName + " " + middleName[0].toUpperCase() + ". " + lastName} 

@@ -3,12 +3,14 @@ package timelog
 import grails.converters.*
 
 class EmployeeController {
+	FileUploadService fileUploadService
 
     def index() {
 		render view:"index", model:[employeeList:Employee.list()]
 	}
 	
 	def show(Employee employee) {
+		println employee.fullName()
 		respond employee
 	}
 	
@@ -19,7 +21,7 @@ class EmployeeController {
 		respond employee, view:"create"
 	}
 	
-	def save(EmployeeHandler employee){
+	def save(Employee employee){
 		println "WE ACTUALLY GOT HERE"
 		if (employee){		
 			if (employee.hasErrors()){
@@ -28,12 +30,17 @@ class EmployeeController {
 				println employee.errors
 				render model:[employee:employee], view:"create"
 			}
-			if (employee.save(flush:true)){
+			if (employee.save()){
 				def avatar = request.getFile('photo')
 				if (!avatar.isEmpty()){
-					employee.photo_url = fileUploadService.upload(avatar, "${employee.id}", "images/avatars")
-				} else employee.photo_url = "default-avatar.png"
+					employee.photo_url = fileUploadService.upload(avatar, "${employee.id}", "/images/avatars")
+				} else employee.photo_url = "images/default-avatar.png"
+				println employee.photo_url
+				employee.save(flush:true)
 				redirect action:"show", id:employee.id
+			} else {
+				println "ERROR ON SAVE"
+				employee.errors.allErrors.each{ println it }
 			}
 		}
 	}

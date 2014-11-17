@@ -10,9 +10,25 @@ class KioskController {
 		render view:"index"
 	}
 	
+	def log(Employee employee){
+		
+		if (employee){
+		def newLog = new Log(
+				employee : employee,
+				logTime : new Date(),
+				isLogIn : (!employee.isIsLoggedIn())
+			)
+		newLog.save flush:true
+		employee.lastLog = newLog.logTime
+		employee.isLoggedIn = newLog.isLogIn
+		employee.save flush:true
+		render newLog as JSON
+		} else render 'Something is wrong'
+	}
+	
 	def employees(){
-		println "We found the action"
-		render ([employees:Employee.list(params)] as JSON)
+		//println "We found the action"
+		render (Employee.list(params) as JSON)
 	}
 	
 	def last_log(){

@@ -3,13 +3,69 @@ header.well{
 	margin-bottom: 0;
 }
 
+.btn-numpad{
+	border-radius: 0;
+	padding: 15px;
+	font-size: 36px;
+}
+
+.modal-details h2, .modal-details h3{
+	margin: 0;
+}
+
+.modal-details h1{
+	padding-top: 20px;
+}
+
 .navbar{
 	border-radius: 0;
 	margin-bottom: 10px;
 }
 
+.primary{
+	color: #428bca;
+}
+
+.pin{
+	border-radius: 0;
+	text-align: center;
+	line-height: 36px;
+	font-size: 32px;
+	height: 54px;
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+.modal-details{
+	margin-left: 20px;
+}
+
 .row.large-clearing{
 	margin: 20px auto
+}
+
+.btn-stub{
+	text-align: center;
+	border-radius: 10px;
+	margin: 0 15px;
+}
+
+.stub.ng-move,
+.stub.ng-enter,
+.stub.ng-leave {
+  -webkit-transition:all 0.5s;
+  transition:all 0.5s;
+}
+
+.stub.ng-leave.ng-leave-active,
+.stub.ng-move,
+.stub.ng-enter {
+  opacity:0;
+}
+
+.stub.ng-leave,
+.stub.ng-move.ng-move-active,
+.stub.ng-enter.ng-enter-active {
+  opacity:1;
 }
 
 .circle-crop-200{	
@@ -22,4 +78,5 @@ header.well{
 	border: 8px solid #fff;
 	box-shadow: 4px 4px 10px #000;
 	margin: 0 auto;
+	background-color: #fff;
 }

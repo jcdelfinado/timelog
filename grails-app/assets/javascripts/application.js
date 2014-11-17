@@ -6,6 +6,7 @@
 // to create separate JavaScript files as needed.
 //
 //= require jquery
+//= require bootstrap
 //= require grails-angularjs
 
 if (typeof jQuery !== 'undefined') {

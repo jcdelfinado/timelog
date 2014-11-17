@@ -1,17 +1,24 @@
-var app = angular.module('Kiosk', [])
+//var app = angular.module('kiosk.controllers')
 
-function EmployeeStub($http){
-	alert('OK we got this');
+function Employees($http, $scope){
 	var employee = this;
-	var get = function(id){
-		$.employee.list
+	this.showModal = function(target, index){
+		$scope.target = target;
+		console.log('Showing modal for employee in index ' + index);
+		$scope.focus = $scope.list[index];
+		$scope.focus.index = index;
+		console.log('Focus is now on ' + $scope.focus.firstName);
+		$('.employee-modal').modal('show');
 	}
-	$.get('/timelog/kiosk/employees').success(function(data){
-		console.log("We actually got some data! hahaha")
-		employee.list = data['employees'];
+	$http.get('/timelog/kiosk/employees').success(function(data){
+		$scope.list = data;
 		console.log(JSON.stringify(data));
-		console.log(employee.list[0].firstName)
-	})
-}
-
-app.controller('EmployeeStub',  ['$http', function($http){EmployeeStub($http);}]);
+		$scope.focus = $scope.list[0];
+		console.log($scope.list[0].firstName)
+	});
+};
+app.controller('Employees',  ['$http', '$scope', Employees]);
+/*
+function showModal (target-pin, index){
+	
+};*/

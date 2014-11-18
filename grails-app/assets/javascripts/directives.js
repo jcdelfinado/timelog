@@ -1,18 +1,37 @@
-//var app = angular.module('kiosk.directives')
-
+console.log("We're processing directives");
+var app = angular.module("kiosk");
+//the employee modal
 app.directive('employeeModal', function(){
-	//alert('NUMPAD!')
+	console.log('modal')
 	return {
 		restrict: 'E',
-		template: '/timelog/assets/employee-modal.html'
+		templateUrl: '/timelog/assets/_employee-modal.html'
 	}
 });
-//alert('DIRECTIVES!');
+
+app.directive('timeDisplay', ['$interval', function($interval){
+	console.log('test');
+	return {
+		restrict: 'E',
+		templateUrl: '/timelog/assets/_time.html',
+		link: function($scope){
+			$interval(function(){
+				$scope.now = new Date();
+			}, 500)
+		}
+	};
+}]);
+//numpad directive
 app.directive('numpad', ['$http', function($http){
+	console.log('numpad')
 	return {
 		restrict: 'E',
 		templateUrl: '/timelog/assets/_numpad.html',
 		controller: ['$http', '$scope', function($http, $scope){
+			$('.modal').on('hidden.bs.modal', function(event){
+				$scope.pin = '';
+				$scope.adminPin = '';
+			});
 			$scope.pressSubmit = function(id){
 				console.log('Logging employee ' + id)
 				if ($scope.target == '#employee-pin'){
@@ -22,11 +41,12 @@ app.directive('numpad', ['$http', function($http){
 							$scope.focus.isLoggedIn = data.isLogIn;
 							$scope.list[$scope.focus.index].lastLog = data.logTime;
 							$scope.list[$scope.focus.index].isLoggedIn = data.isLogIn;
+							$('.modal').modal('hide');
 						});
 				}
 			};
 		}],
-		link: function ($scope, $http){
+		link: function ($scope){
 			var numpad = this;
 			$scope.pin = '';
 			$scope.adminPin = '';

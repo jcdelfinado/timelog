@@ -1,4 +1,4 @@
-//var app = angular.module('kiosk.controllers')
+var app = angular.module('kiosk');
 
 function Employees($http, $scope){
 	var employee = this;

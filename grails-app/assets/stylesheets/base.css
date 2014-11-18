@@ -26,6 +26,29 @@ header.well{
 	color: #428bca;
 }
 
+time-display h1, time-display h4{
+	margin: 0;
+}
+
+time-display h1 {
+	font-size: 60px;
+}
+
+time-display h4{
+	font-size: 24px;
+}
+
+time-display{
+	color: #fff;
+	background: rgba(0, 0, 0, .5);
+	float: right;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 5px 20px;
+	margin: 0;
+}
+
 .pin{
 	border-radius: 0;
 	text-align: center;

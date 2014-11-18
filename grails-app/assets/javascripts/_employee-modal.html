@@ -1,0 +1,25 @@
+<div class="modal fade employee-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body clearfix">
+				<span class="glyphicon glyphicon-remove" data-dismiss="modal"></span>
+				<div class="circle-crop-200 pull-left">
+					<img ng-src="{{ '/timelog/' + focus.photo_url }}" height=200/>
+				</div>
+				<div class="pull-left modal-details row">
+					<h1>{{ focus.firstName }} {{ focus.lastName }}</h1>
+					<h3>{{ focus.position }}</h3>
+					<h2 >
+						<small class="primary" ng-if="focus.isLoggedIn">Logged In</small>
+						<small ng-if="!focus.isLoggedIn">Logged Out</small><br>
+						<small ng-class="{'primary':focus.isLoggedIn}">{{ focus.lastLog | date:'dd-MMM-yyyy (EEE) hh:mm a' }}</small>
+					</h2>
+				</div>
+				<div class="bottom-content row">
+					<input type="password" id="employee-pin" value="{{ pin }}" class="form-control pin" placeholder="Use the numpad to enter your PIN"/>
+					<numpad></numpad>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

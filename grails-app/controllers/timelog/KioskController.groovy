@@ -10,20 +10,23 @@ class KioskController {
 		render view:"index"
 	}
 	
-	def log(Employee employee){
-		
+	def log(){
+		def employee = Employee.get(params.id)
 		if (employee){
-		def newLog = new Log(
-				employee : employee,
-				logTime : new Date(),
-				isLogIn : (!employee.isIsLoggedIn())
-			)
-		newLog.save flush:true
-		employee.lastLog = newLog.logTime
-		employee.isLoggedIn = newLog.isLogIn
-		employee.save flush:true
-		render newLog as JSON
-		} else render 'Something is wrong'
+			if (params.pin == employee.pin){
+				println "match!"
+				def newLog = new Log(
+						employee : employee,	
+						logTime : new Date(),
+						isLogIn : (!employee.isIsLoggedIn())
+					)
+				newLog.save flush:true
+				employee.lastLog = newLog.logTime
+				employee.isLoggedIn = newLog.isLogIn
+				employee.save flush:true
+				render newLog as JSON
+			} else render status:403
+		} else render 'Something is wrong', status:500
 	}
 	
 	def employees(){

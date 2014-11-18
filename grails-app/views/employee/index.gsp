@@ -17,6 +17,7 @@
 							<th>Position</th>
 							<th>Logged</th>
 							<th>Time</th>
+							<th>PIN</th>
 						</thead>
 						<tbody>
 							<g:each in="${employeeList}" var="employee">
@@ -25,6 +26,7 @@
 									<td>${ employee?.position }</td>
 									<td><g:formatBoolean boolean="${ employee?.isLoggedIn }" true="IN" false="OUT"/></td>
 									<td><g:formatDate format="E, dd-MMM-yyyy hh:mm a" date="${ employee?.lastLog }"/></td>
+									<td>${ employee?.pin }</td>
 								</tr>
 							</g:each>
 						</tbody>

@@ -10,19 +10,16 @@ class EmployeeController {
 	}
 	
 	def show(Employee employee) {
-		println employee.fullName()
 		respond employee
 	}
 	
 	def create(){
-		println "we're creating again"
 		def employee = new Employee(params)
 		
 		respond employee, view:"create"
 	}
 	
 	def save(Employee employee){
-		println "WE ACTUALLY GOT HERE"
 		if (employee){		
 			if (employee.hasErrors()){
 				flash.message = "<b>Oops!</b> Looks like there's something wrong with this form."
@@ -35,7 +32,6 @@ class EmployeeController {
 				if (!avatar.isEmpty()){
 					employee.photo_url = fileUploadService.upload(avatar, "${employee.id}", "/images/avatars")
 				} else employee.photo_url = "images/default-avatar.png"
-				println employee.photo_url
 				employee.save(flush:true)
 				redirect action:"show", id:employee.id
 			} else {

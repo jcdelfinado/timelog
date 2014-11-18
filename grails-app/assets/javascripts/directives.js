@@ -9,8 +9,9 @@ app.directive('employeeModal', function(){
 	}
 });
 
+//time display
 app.directive('timeDisplay', ['$interval', function($interval){
-	console.log('test');
+	console.log('time');
 	return {
 		restrict: 'E',
 		templateUrl: '/timelog/assets/_time.html',
@@ -21,6 +22,9 @@ app.directive('timeDisplay', ['$interval', function($interval){
 		}
 	};
 }]);
+
+
+
 //numpad directive
 app.directive('numpad', ['$http', function($http){
 	console.log('numpad')
@@ -32,17 +36,36 @@ app.directive('numpad', ['$http', function($http){
 				$scope.pin = '';
 				$scope.adminPin = '';
 			});
-			$scope.pressSubmit = function(id){
+			$scope.pressSubmit = function(){
+				var id = $scope.focus.id;
 				console.log('Logging employee ' + id)
 				if ($scope.target == '#employee-pin'){
-					$http.post('/timelog/kiosk/log/'+id).
-						success(function(data){
-							$scope.focus.lastLog = data.logTime;
-							$scope.focus.isLoggedIn = data.isLogIn;
-							$scope.list[$scope.focus.index].lastLog = data.logTime;
-							$scope.list[$scope.focus.index].isLoggedIn = data.isLogIn;
-							$('.modal').modal('hide');
-						});
+					var data = {pin : $scope.pin, id: $scope.focus.id};
+					console.log("We're passing this " + data.pin)
+					$http({
+						method: 'POST',
+						url: '/timelog/kiosk/log/',
+						data: data,
+						headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+						transformRequest: function(obj){
+							var str = [];
+							for(var p in obj)
+								str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+							return str.join("&");
+						},
+					}).success(function(data){
+						$scope.focus.lastLog = data.logTime;
+						$scope.focus.isLoggedIn = data.isLogIn;
+						$scope.list[$scope.focus.index].lastLog = data.logTime;
+						$scope.list[$scope.focus.index].isLoggedIn = data.isLogIn;
+						$scope.errors.mismatch = false;	
+						$('.modal').modal('hide');
+					}).error(function(data, status){
+						if (status==403){
+							$scope.errors.mismatch = true;
+							$scope.pressCancel();
+						}
+					});
 				}
 			};
 		}],
@@ -51,12 +74,29 @@ app.directive('numpad', ['$http', function($http){
 			$scope.pin = '';
 			$scope.adminPin = '';
 			$scope.pressCancel = function(){
-				if ($scope.target=='#employee-pin') $scope.pin ='';
-				else $scope.adminPin = '';
+				if ($scope.target=='#employee-pin') {
+					$scope.pin ='';
+					$('#employee-pin').removeClass('ng-dirty');
+					$('#employee-pin').addClass('ng-pristine');
+				}
+				else{
+					$scope.adminPin = '';
+					$('#admin-pin').removeClass('ng-dirty');
+					$('#admin-pin').addClass('ng-pristine');
+				}
 			}
 			$scope.pressNum = function(num){
-				if ($scope.target=='#employee-pin') $scope.pin += num;
-				else $scope.adminPin += num;
+				if ($scope.target=='#employee-pin') {
+					$scope.pin += num;
+					console.log("focus.pin : " + $scope.focus.pin);
+					$('#employee-pin').removeClass('ng-pristine');
+					$('#employee-pin').addClass('ng-dirty');
+				}
+				else {
+					$scope.adminPin += num;
+					$('#admin-pin').removeClass('ng-pristine');
+					$('#admin-pin').addClass('ng-dirty');					
+				}
 			};
 		}
 	}

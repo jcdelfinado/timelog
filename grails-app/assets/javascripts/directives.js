@@ -9,6 +9,48 @@ app.directive('employeeModal', function(){
 	}
 });
 
+//fullscreen control
+app.directive('fullscreenButton', function(){
+	console.log('fullscreen');
+	return {
+		restrict: 'E',
+		templateUrl: '/timelog/assets/_fullscreen.html',
+		controller: ['$scope', function($scope){
+			console.log('defining control..')
+			angular.forEach(["fullscreenchange", "mozfullscreenchange", "webkitfullscreenchange", "msfullscreenchange"], function(value){
+				console.log('adding listener for ' + value);
+				$(document).on(value, function(event){
+					console.log('event fired := ' + event.name);
+					$scope.fullscreen = (document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement)?true:false;
+				});
+			});
+			
+			this.toggleFullscreen = function(){				
+				$scope.fullscreen = (document.fullscreen || document.mozFullScreen || document.webkitIsFullScreen || document.msFullscreenElement)?true:false;
+				console.log('fullscreen := ' + $scope.fullscreen);
+				var doc;
+				if (!$scope.fullscreen){
+					console.log('Going fullscreen...');
+					doc = document.documentElement;
+					var request = doc.requestFullscreen || doc.mozRequestFullScreen || doc.webkitRequestFullScreen || doc.msRequestFullscreen;
+				}else{
+					console.log('Exiting fullscreen...');
+					doc = document;
+					var request = doc.exitFullscreen || doc.cancelFullScreen || doc.mozCancelFullScreen || doc.webkitCancelFullscreen || doc.webkitCancelFullScreen;
+				} 
+					
+				if (typeof request != 'undefined' && request) request.call(doc);
+				else console.log('Bad fullscreen request')
+				
+			}
+		}],
+		controllerAs: 'fullscreenCtrl',
+		link: function(scope, element, attrs){
+			
+		}
+	};
+});
+
 //time display
 app.directive('timeDisplay', ['$interval', function($interval){
 	console.log('time');
@@ -31,10 +73,11 @@ app.directive('numpad', ['$http', function($http){
 	return {
 		restrict: 'E',
 		templateUrl: '/timelog/assets/_numpad.html',
-		controller: ['$http', '$scope', function($http, $scope){
+		controller: ['$http', '$scope', '$interval', function($http, $scope, $interval){
 			$('.modal').on('hidden.bs.modal', function(event){
 				$scope.pin = '';
 				$scope.adminPin = '';
+				$interval.cancel($scope.intervalId);
 			});
 			$scope.pressSubmit = function(){
 				var id = $scope.focus.id;

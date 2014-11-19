@@ -12,7 +12,8 @@
 					<h2 >
 						<small class="primary" ng-if="focus.isLoggedIn">Logged In</small>
 						<small ng-if="!focus.isLoggedIn">Logged Out</small><br>
-						<small ng-class="{'primary':focus.isLoggedIn}">{{ focus.lastLog | date:'dd-MMM-yyyy (EEE) hh:mm a' }}</small>
+						<small ng-class="{'primary':focus.isLoggedIn}">{{ focus.lastLog | date:'dd-MMM-yyyy (EEE) hh:mm a' }}</small><br>
+						<small ng-class="{'primary':focus.isLoggedIn}">{{ focus.today }}</small>
 					</h2>
 				</div>
 				<div class="bottom-content row" >

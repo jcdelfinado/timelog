@@ -3,24 +3,11 @@ header.well{
 	margin-bottom: 0;
 }
 
+
 content{
-	overflow-x: scroll;
+	margin-top: 10px;
 }
 
-.animate-show{
-	opacity: 1;
-	line-height: 20px;
-}
-
-.animate-show.ng-hide-add.ng-hide-add-active,
-.animate-show.ng-hide-remove.ng-hide-remove-active{
-	transition: all .5s;
-}
-
-.animate-show.ng-hide{
-	opacity: 0;
-	line-height: 0;
-}
 
 .btn-numpad{
 	border-radius: 0;
@@ -39,7 +26,7 @@ content{
 
 .navbar{
 	border-radius: 0;
-	margin-bottom: 10px;
+	transition: all .5s;
 }
 
 .primary{
@@ -91,13 +78,12 @@ time-display{
 
 .btn-stub{
 	text-align: center;
-	border-radius: 10px;
 	transition: all .5s;
 	margin-bottom: 20px;
 }
 
-.btn-stub:active{
-	box-shadow: 0 0 6px #428bca;
+.btn-stub > .circle-crop-200:hover{
+	box-shadow: 0 0 18px 6px #5cb85c;
 }
 
 
@@ -109,15 +95,15 @@ time-display{
 	height: 200px;
 	width: 200px;
 	border: 8px solid #fff;
-	box-shadow: 4px 4px 10px #000;
+	box-shadow: 0 0 18px #000;
 	margin: 0 auto;
 	background-color: #fff;
 	transition: all .5s;
 }
 
 .logged-in{
-	border-color: #428bca;
-	box-shadow: 0 0 12px 4px #428bca;
+	border-color: #fff;
+	box-shadow: 0 0 18px 6px #428bca;
 }
 
 .errors {

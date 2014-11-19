@@ -22,7 +22,7 @@
 				<content>
 					<div ng-controller="Employees as employees">
 						<div class="col-md-3 animate-repeat" ng-repeat="employee in list">
-						<div class="btn btn-default btn-stub col-md-12" ng-click="employees.showModal('#employee-pin', $index)">
+						<div class="btn-stub col-md-12 hand-pointed" ng-click="employees.showModal('#employee-pin', $index)">
 							<div class="circle-crop-200" ng-class="{'logged-in':employee.isLoggedIn}">
 								<img ng-src="{{ '/timelog/' + employee.photo_url }}" height=200/>
 							</div>
@@ -32,10 +32,8 @@
 						</div>
 						<employee-modal></employee-modal>
 					</div>
-					
 				</content>
 			</div>
-			<span class="glyphicon glyphicon-fullscreen hand-pointed" id="go-fullscreen"></span>
 		</div>
 	</body>
 </html>

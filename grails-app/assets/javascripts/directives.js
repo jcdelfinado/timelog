@@ -1,5 +1,6 @@
 console.log("We're processing directives");
 var app = angular.module("kiosk");
+
 //the employee modal
 app.directive('employeeModal', function(){
 	console.log('modal')
@@ -84,7 +85,7 @@ app.directive('numpad', ['$http', function($http){
 				console.log('Logging employee ' + id)
 				if ($scope.target == '#employee-pin'){
 					var data = {pin : $scope.pin, id: $scope.focus.id};
-					console.log("We're passing this " + data.pin)
+					//console.log("We're passing this " + data.pin)
 					$http({
 						method: 'POST',
 						url: '/timelog/kiosk/log/',

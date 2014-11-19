@@ -14,7 +14,7 @@ class KioskController {
 		def employee = Employee.get(params.id)
 		if (employee){
 			if (params.pin == employee.pin){
-				println "match!"
+				//println "match!"
 				def newLog = new Log(
 						employee : employee,	
 						logTime : new Date(),
@@ -55,23 +55,23 @@ class KioskController {
 	}
 	
 	def today(){
-		println "fn today"
+		//println "fn today"
 		def employee = Employee.get(params.id)
-		println "id := " + params.id
+		//println "id := " + params.id
 		def lastLog = last_log(employee)
 		def logsToday = logs_today(employee)
 		def total = new TimeDuration(0,0,0,0)
 		def prev
 		for (current in logsToday){
 			if (prev){
-				println "prev := " + prev.logTime
+				
 				if (current.isLogIn) prev = current
 				else {
-					println "computing"
+					//println "computing"
 					use(groovy.time.TimeCategory){
 						total += current.logTime - prev.logTime
 					}
-					println total
+					//println total
 				}
 			} else prev = current;
 		}
@@ -81,7 +81,7 @@ class KioskController {
 				running = (new Date() - lastLog.logTime) + total
 			else running = total
 		}
-		println running.hours + "h " + running.minutes
+		//println running.hours + "h " + running.minutes
 		if (running) render running.hours + " hour(s), " + running.minutes + " minute(s)"
 		else render 'No logged time today yet.'
 	}

@@ -48,7 +48,7 @@
 <%--PIN--%>
 <div class="form-group ${ hasErrors(bean:employee, field:'pin', 'has-error has-feedback') }">
 	<label for="pin"><g:message code="employee.pin.label" default="PIN"/></label>
-	<g:textField class="form-control" name="pin" value="${ employee?.pin }" required=""/>
+	<g:passwordField class="form-control" name="pin" value="${ employee?.pin }" required=""/>
 	<g:hasErrors bean="${ employee }" field="pin">
 		<span class="glyphicon glyphicon-remove form-control-feedback"></span>
 		<g:eachError bean="${ employee }" field="pin" var="e">

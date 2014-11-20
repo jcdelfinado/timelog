@@ -1,0 +1,19 @@
+<div class="modal fade admin-modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body clearfix">
+				<div class="modal-header">	
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+					<h3>You need to be admin to do this.</h3>
+				</div>
+				<div class="bottom-content row" >
+					<form name="inputPin" ng-class="{'has-errors':errors.mismatch}" class="form-group">
+						<input ng-model="adminPin" name="adminPinField" type="password" id="admin-pin" class="form-control pin" placeholder="Use the numpad to enter Admin PIN"/>
+					</form>
+					<span class="help-block errors animate-show" ng-show="errors.mismatch"><b>Oops!</b> That's not right. Please try again.</span>
+					<numpad></numpad>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

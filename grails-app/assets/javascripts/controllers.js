@@ -9,6 +9,7 @@ function Employees($http, $scope, $interval){
 			$scope.focus.today = data;
 		});
 	};
+	
 	this.showModal = function(target, index){
 		$scope.target = target;
 		$scope.errors = [];

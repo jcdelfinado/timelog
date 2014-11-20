@@ -17,7 +17,28 @@
 				<h1><small>Time Logger Exercise</small></h1>
 				<time-display></time-display>
 			</header>
-			<g:render template="/nav"></g:render>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-left" ng-show="!fullscreen">
+						<ul class="nav navbar-nav">
+							<li>
+								<g:link controller="kiosk">Kiosk</g:link>
+							</li>
+							<li><g:link controller="employee">Employees</g:link></li>
+							<li><g:link controller="log">Logs</g:link></li>
+						</ul>
+					</div>
+					<div class="navbar-brand" ng-show="fullscreen">
+						Tap your name or photo to log in or log out.						
+					</div>
+					<div class="navbar-right">
+						<ul class="nav navbar-nav">
+							<li><a href="#"><fullscreen-button></fullscreen-button></a></li>
+						</ul>
+					</div>
+				</div>
+				<admin-modal></admin-modal>
+			</nav>
 			<div class="container-fluid">
 				<content>
 					<div ng-controller="Employees as employees">

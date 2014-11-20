@@ -29,6 +29,16 @@ class KioskController {
 		} else render 'Something is wrong', status:500
 	}
 	
+	def match(){
+		println "Looking for employee with PIN " + params.pin
+		def employee = Employee.where({
+			pin == params.pin
+		}).find()
+		if (employee)
+			render employee.isAdmin
+		else render status:404
+	}
+	
 	def employees(){
 		//println "We found the action"
 		render (Employee.list(params) as JSON)
